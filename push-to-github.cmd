@@ -10,12 +10,14 @@ echo  ================================================
 echo.
 
 git config http.sslBackend openssl
+git remote remove origin >nul 2>&1
+git remote add origin https://github.com/VibeCoderGPT/elmateco.com.git
 git push -u origin main
 if errorlevel 1 goto echec
 
 echo.
 echo  [OK] C'est envoye ! Le site est sur GitHub :
-echo       https://github.com/VibeCoderGPT/elmateco-site
+echo       https://github.com/VibeCoderGPT/elmateco.com
 echo.
 goto fin
 

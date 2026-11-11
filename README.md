@@ -16,11 +16,11 @@ n'importe quel hébergeur statique (GitHub Pages, Netlify, Vercel, OVH…).
 ## ☁️ Versioning / hébergement (GitHub)
 
 Le projet est versionné sur GitHub (dépôt privé) :
-<https://github.com/VibeCoderGPT/elmateco-site>
+<https://github.com/VibeCoderGPT/elmateco.com>
 
 - **Télécharger le site complet** : page du dépôt → bouton vert **Code → Download ZIP**
   (GitHub fabrique le ZIP tout seul, musique incluse — pratique pour envoyer à un ami).
-- **Cloner** : `git clone https://github.com/VibeCoderGPT/elmateco-site.git`
+- **Cloner** : `git clone https://github.com/VibeCoderGPT/elmateco.com.git`
 - Les MP3 de la playlist sont inclus dans le dépôt (`assets/music/`).
 
 ### 📤 Pousser une mise à jour sur GitHub
