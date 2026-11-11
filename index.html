@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELMATECO — Official Site | Club Music · Heavy Bass · EDM</title>
+  <meta name="description" content="ELMATECO: high-energy club music, heavy bass and dancefloor vibes. Watch the new video, stream the music non-stop and discover the Elmateco universe.">
+  <meta name="theme-color" content="#180a2b">
+  <link rel="icon" href="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s160-c-k-c0x00ffffff-no-rj">
+  <meta property="og:title" content="ELMATECO — Official Site">
+  <meta property="og:description" content="Club music · Heavy bass · Dancefloor vibes. New video + non-stop music.">
+  <meta property="og:image" content="https://yt3.googleusercontent.com/fJtIQdmwDoXqJ-7_-HNLjSLJdrfBHD-7M_s291Q9YBBMGm38JBXJKY4mE9G0XDRaVBfyLKpbFeI=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ======================= NAVIGATION ======================= -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#accueil">
+        <img class="nav-avatar" src="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s88-c-k-c0x00ffffff-no-rj" alt="Elmateco avatar" data-i18n-attr="alt" data-i18n-key="avatar_alt">
+        <span class="nav-name">ELMATECO</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label" data-i18n-key="nav_aria">
+        <a href="#clip" data-i18n="nav_new">🎬 New video</a>
+        <a href="#musique" data-i18n="nav_music">🎵 Music</a>
+        <a href="#apropos" data-i18n="nav_about">✨ About</a>
+      </nav>
+      <a class="btn btn-subscribe" href="https://www.youtube.com/@ELMATEKO?sub_confirmation=1" target="_blank" rel="noopener" data-i18n="nav_subscribe">Subscribe</a>
+
+      <!-- 🌐 Language picker (ENG top right) -->
+      <div class="lang" id="langBox">
+        <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Change language" data-i18n-attr="aria-label" data-i18n-key="lang_aria">
+          <span class="lang-globe" aria-hidden="true">🌐</span>
+          <span class="lang-code" id="langCode">EN</span>
+          <span class="lang-caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu">
+          <p class="lang-title" data-i18n="lang_title">Choose your language</p>
+          <div class="lang-list" id="langList" role="listbox" aria-label="Languages"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================= HERO ======================= -->
+    <section class="hero" id="accueil">
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+      <div class="hero-content">
+        <div class="hero-frame" data-reveal>
+          <img class="hero-banner" src="https://yt3.googleusercontent.com/fJtIQdmwDoXqJ-7_-HNLjSLJdrfBHD-7M_s291Q9YBBMGm38JBXJKY4mE9G0XDRaVBfyLKpbFeI=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="Official Elmateco channel banner" data-i18n-attr="alt" data-i18n-key="banner_alt">
+        </div>
+        <div class="hero-avatar-ring" data-reveal style="--i:1">
+          <img class="hero-avatar" src="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s800-c-k-c0x00ffffff-no-rj" alt="Elmateco avatar" data-i18n-attr="alt" data-i18n-key="avatar_alt">
+        </div>
+        <h1 class="hero-title" data-reveal style="--i:2">ELMATECO</h1>
+        <p class="hero-tag" data-reveal style="--i:3">
+          <span data-i18n="hero_tag">Club music · Heavy bass · Dancefloor vibes 🔥</span><br>
+          <span class="hero-tag-sub" data-i18n="hero_sub">From Quebec to the whole world 🌍</span>
+        </p>
+        <div class="hero-stats" data-reveal style="--i:4">
+          <div class="stat"><span class="stat-num" data-count="23.1" data-decimals="1">0</span><span class="stat-label">K <span data-i18n="subs">subscribers</span></span></div>
+          <div class="stat"><span class="stat-num" data-count="146" data-decimals="0">0</span><span class="stat-label" data-i18n="videos">videos</span></div>
+          <div class="stat"><span class="stat-num" data-count="6.4" data-decimals="1">0</span><span class="stat-label">M <span data-i18n="views">views</span></span></div>
+        </div>
+        <div class="hero-cta" data-reveal style="--i:5">
+          <a class="btn btn-primary" href="#clip" data-i18n="hero_clip">▶ &nbsp;New video</a>
+          <a class="btn btn-ghost" href="#musique" data-i18n="hero_music">🎵 &nbsp;Listen to the music</a>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#clip" aria-label="Scroll down" data-i18n-attr="aria-label" data-i18n-key="scroll_hint">⌄</a>
+    </section>
+
+    <!-- ======================= MARQUEE ======================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>ELMATECO</span><i>✦</i><span>CLUB MUSIC</span><i>✦</i><span>HEAVY BASS</span><i>✦</i><span>EDM</span><i>✦</i><span>TWERK VIBES</span><i>✦</i><span>DANCEFLOOR</span><i>✦</i>
+        <span>ELMATECO</span><i>✦</i><span>CLUB MUSIC</span><i>✦</i><span>HEAVY BASS</span><i>✦</i><span>EDM</span><i>✦</i><span>TWERK VIBES</span><i>✦</i><span>DANCEFLOOR</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ======================= NEW VIDEO ======================= -->
+    <section class="section" id="clip">
+      <div class="section-head">
+        <span class="kicker" data-reveal="left" data-i18n="kicker_video">📺 YouTube</span>
+        <h2 data-reveal="flip" data-i18n="clip_h2">The new video</h2>
+      </div>
+
+      <div class="video-shell" data-reveal>
+        <!-- Clickable facade (replaced by the player on click) -->
+        <div id="videoFacade" class="video-facade" role="button" tabindex="0" aria-label="Play the new video" data-i18n-attr="aria-label" data-i18n-key="facade_aria">
+          <img id="facadeThumb" alt="Thumbnail of the new video">
+          <div class="facade-veil"></div>
+          <span class="facade-badge"><span data-i18n="badge_new">🔥 NEW</span> · <span id="facadeAge"></span></span>
+          <div class="facade-play">
+            <span class="pulse p1"></span>
+            <span class="pulse p2"></span>
+            <span class="play-tri">▶</span>
+          </div>
+          <p class="facade-title" id="facadeTitle"></p>
+        </div>
+        <!-- YouTube player (appears on click) -->
+        <div id="videoFrame" class="video-frame" hidden>
+          <iframe id="ytFrame" title="YouTube player — new Elmateco video" data-i18n-attr="title" data-i18n-key="yt_title" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </div>
+      <p class="video-watch" data-reveal><a href="https://www.youtube.com/@ELMATEKO/videos" target="_blank" rel="noopener" data-i18n="watch_all">See all videos on YouTube ↗</a></p>
+
+      <div class="section-sub" data-reveal>
+        <h3 data-i18n="recent_h3">Latest releases</h3>
+      </div>
+      <div class="video-grid" id="recentGrid"></div>
+    </section>
+
+    <!-- ======================= NON-STOP MUSIC ======================= -->
+    <section class="section" id="musique">
+      <div class="section-head">
+        <span class="kicker" data-reveal="left" data-i18n="kicker_music">🎵 Non-stop play</span>
+        <h2 data-reveal="flip" data-i18n="music_h2">The music plays on loop</h2>
+      </div>
+
+      <div class="player" data-reveal="zoom">
+        <div class="player-top">
+          <div class="eq" id="eq" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="track-info">
+            <div class="track-title" id="trackTitle">—</div>
+            <div class="track-artist" id="trackArtist" data-i18n="press_play">Press play</div>
+          </div>
+        </div>
+
+        <div class="player-controls">
+          <button class="pbtn" id="btnPrev" type="button" title="Previous song" aria-label="Previous song" data-i18n-attr="title,aria-label" data-i18n-key="btn_prev">⏮</button>
+          <button class="pbtn pbtn-play" id="btnPlay" type="button" title="Play or pause" aria-label="Play or pause" data-i18n-attr="title,aria-label" data-i18n-key="btn_play_pause">▶</button>
+          <button class="pbtn" id="btnNext" type="button" title="Next song" aria-label="Next song" data-i18n-attr="title,aria-label" data-i18n-key="btn_next">⏭</button>
+          <button class="pbtn pbtn-shuffle" id="btnShuffle" type="button" title="Shuffle" aria-label="Shuffle" data-i18n-attr="title,aria-label" data-i18n-key="btn_shuffle">🔀</button>
+        </div>
+
+        <div class="player-progress">
+          <span id="timeNow">0:00</span>
+          <input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="Position in the song" data-i18n-attr="aria-label" data-i18n-key="seek_aria">
+          <span id="timeDur">0:00</span>
+        </div>
+
+        <div class="player-bottom">
+          <div class="volume">
+            <span class="vol-icon">🔊</span>
+            <input type="range" id="volume" min="0" max="1" value="0.9" step="0.01" aria-label="Volume" data-i18n-attr="aria-label" data-i18n-key="volume_aria">
+          </div>
+        </div>
+
+        <div class="playlist">
+          <h4><span data-i18n="playlist_title">Playlist</span> <span class="playlist-count" id="playlistCount"></span></h4>
+          <ul id="playlistList"></ul>
+        </div>
+
+        <!-- Safety net: if the player is blocked by the browser,
+             the tracks are offered in a native player (always readable) -->
+        <div class="native-fallback hidden" id="nativeFallback">
+          <p data-i18n="fallback_p">💿 Direct playback (if the player above is blocked by your browser):</p>
+          <div id="nativeList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ABOUT ======================= -->
+    <section class="section" id="apropos">
+      <div class="section-head">
+        <span class="kicker" data-reveal="left" data-i18n="kicker_about">✨ About</span>
+        <h2 data-reveal="flip" data-i18n="about_h2">Who is Elmateco?</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card" data-reveal="left">
+          <img class="about-avatar" src="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s800-c-k-c0x00ffffff-no-rj" alt="Elmateco avatar" data-i18n-attr="alt" data-i18n-key="avatar_alt">
+          <h3 class="about-name" data-i18n="about_name">Elmateco</h3>
+          <p class="about-handle" data-i18n="about_handle">@ELMATEKO · Canada 🇨🇦</p>
+          <ul class="about-facts">
+            <li><strong id="aboutSubs">23.1 K</strong> <span data-i18n="subs">subscribers</span></li>
+            <li><strong id="aboutVideos">146</strong> <span data-i18n="videos">videos</span></li>
+            <li><strong id="aboutViews">6.4 M</strong> <span data-i18n="views">views</span></li>
+            <li><span data-i18n="about_since">On YouTube since</span> <strong>2011</strong></li>
+          </ul>
+        </div>
+
+        <div class="about-bio" data-reveal style="--i:1">
+          <p data-i18n="about_bio">Welcome to <strong>Elmateco</strong> 🔊 — the channel dedicated to high-energy <strong>club music</strong>, <strong>heavy bass</strong> and dancefloor vibes. Every track is original music with a creative edit that delivers a powerful EDM experience.</p>
+          <p data-i18n="about_menu">On the menu:</p>
+          <ul class="about-list">
+            <li data-i18n="about_l1">🔥 Club tracks with heavy bass</li>
+            <li data-i18n="about_l2">💃 Twerk &amp; dance visuals</li>
+            <li data-i18n="about_l3">🎛️ Bass visualizers and music videos</li>
+            <li data-i18n="about_l4">⚡ High-energy party vibes</li>
+          </ul>
+          <p class="about-quote" data-i18n="about_quote">“If you love strong bass, dance energy and club culture: subscribe and turn up the volume.” 🔊</p>
+
+          <div class="social-grid">
+            <a class="social-chip" style="--c:#ff0033" href="https://www.youtube.com/@ELMATEKO" target="_blank" rel="noopener">▶️ YouTube</a>
+            <a class="social-chip" style="--c:#1db954" href="https://open.spotify.com/intl-fr/artist/1jnmquCWHzuyGLV4pJRiTU" target="_blank" rel="noopener">🎧 Spotify</a>
+            <a class="social-chip" style="--c:#fa2d48" href="https://music.apple.com/fr/artist/elmateco/1817971885" target="_blank" rel="noopener">🍎 Apple Music</a>
+            <a class="social-chip" style="--c:#ff9900" href="https://music.amazon.com/artists/B0FBLH56TR/elmateco" target="_blank" rel="noopener">📦 Amazon Music</a>
+            <a class="social-chip" style="--c:#69c9d0" href="https://www.tiktok.com/@elmateco_official" target="_blank" rel="noopener">🎵 TikTok</a>
+            <a class="social-chip" style="--c:#a855f7" href="https://hyperfollow.com/elmateco" target="_blank" rel="noopener">🔗 HyperFollow</a>
+          </div>
+          <p class="about-contact"><span data-i18n="about_contact">📬 Contact:</span> <a href="mailto:Info.elmateco@gmail.com">Info.elmateco@gmail.com</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer">
+    <img class="footer-avatar" src="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s88-c-k-c0x00ffffff-no-rj" alt="" aria-hidden="true">
+    <p class="footer-name">ELMATECO</p>
+    <p class="footer-note" data-i18n="footer_note">Unofficial fan site — images and music © their rights holders.<br>Made with ❤️ and a lot of bass 🔉</p>
+    <p class="footer-year">© <span id="year"></span> — <a href="https://www.youtube.com/@ELMATEKO" target="_blank" rel="noopener">youtube.com/@ELMATEKO</a></p>
+  </footer>
+
+  <!-- ======================= MINI PLAYER + MUSIC PILL ======================= -->
+  <div class="mini-player hidden" id="miniPlayer">
+    <img class="mini-avatar" src="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s88-c-k-c0x00ffffff-no-rj" alt="" aria-hidden="true">
+    <span class="mini-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="mini-title" id="miniTitle">—</span>
+    <button class="mini-btn" id="miniToggle" type="button" aria-label="Play or pause" data-i18n-attr="aria-label" data-i18n-key="btn_play_pause">⏸</button>
+  </div>
+  <button class="music-pill hidden" id="musicPill" type="button" data-i18n="pill">🔊 &nbsp;Start the music!</button>
+
+  <!-- Decorative backgrounds -->
+  <div class="bg-blobs" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="blob b4"></span>
+  </div>
+  <div class="bg-noise" aria-hidden="true"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/player.js"></script>
+</body>
+</html>

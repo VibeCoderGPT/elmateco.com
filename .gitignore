@@ -1,0 +1,4 @@
+# Artefacts locaux / personnels (ne vont PAS sur GitHub)
+_build/
+*.zip
+ELMATECO-CONTEXTE.md
