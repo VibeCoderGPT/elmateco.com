@@ -10,15 +10,10 @@ echo  ================================================
 echo.
 
 git config http.sslBackend openssl
-git remote remove origin >nul 2>&1
-git remote add origin https://github.com/VibeCoderGPT/elmateco.com.git
-git push -u origin main
-if errorlevel 1 (
-  echo.
-  echo  Le depot contient deja quelque chose : je force la synchro...
-  git push -u origin main --force
-  if errorlevel 1 goto echec
-)
+set GH=C:\Users\micha\.ghcli\bin\gh.exe
+for /f "usebackq delims=" %%t in (`%GH% auth token`) do set TOK=%%t
+git push https://x-access-token:%TOK%@github.com/VibeCoderGPT/elmateco.com.git main
+if errorlevel 1 goto echec
 
 echo.
 echo  [OK] C'est envoye ! Le site est sur GitHub :
@@ -28,9 +23,7 @@ goto fin
 
 :echec
 echo.
-echo  [ECHEC] L'envoi n'a pas fonctionne.
-echo  Si une fenetre de connexion GitHub s'est ouverte, connecte-toi,
-echo  puis relance ce script (double-clic). Sinon, copie le message
+echo  [ECHEC] L'envoi n'a pas fonctionne. Copie le message
 echo  d'erreur ci-dessus et montre-le moi.
 echo.
 :fin
