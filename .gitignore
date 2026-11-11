@@ -2,3 +2,4 @@
 _build/
 *.zip
 ELMATECO-CONTEXTE.md
+.gh-token
