@@ -23,6 +23,15 @@ Le projet est versionné sur GitHub (dépôt privé) :
 - **Cloner** : `git clone https://github.com/VibeCoderGPT/elmateco-site.git`
 - Les MP3 de la playlist sont inclus dans le dépôt (`assets/music/`).
 
+### 📤 Pousser une mise à jour sur GitHub
+
+Après avoir modifié des fichiers, double-clique sur **`push-to-github.cmd`** :
+le script envoie tout sur GitHub. La première fois, une fenêtre de connexion
+GitHub s'ouvre — connecte-toi une fois, Windows s'en souvient.
+
+> 💡 Le ZIP « elmateco-site.zip » n'est plus nécessaire : GitHub fournit le
+> bouton **Code → Download ZIP**, toujours à jour.
+
 ## 📄 Ce qu'il contient
 
 | Section | Description |
