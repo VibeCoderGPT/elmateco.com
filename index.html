@@ -6,6 +6,10 @@
   <title>ELMATECO — Official Site | Club Music · Heavy Bass · EDM</title>
   <meta name="description" content="ELMATECO: high-energy club music, heavy bass and dancefloor vibes. Watch the new video, stream the music non-stop and discover the Elmateco universe.">
   <meta name="theme-color" content="#180a2b">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Politique de sécurité du contenu (CSP) : seuls les domaines réellement
+       utilisés sont autorisés (YouTube, Google Fonts, proxy de flux vidéo). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://yt3.googleusercontent.com https://i.ytimg.com; media-src 'self' https:; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://www.youtube.com https://api.allorigins.win https://corsproxy.io;">
   <link rel="icon" href="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s160-c-k-c0x00ffffff-no-rj">
   <meta property="og:title" content="ELMATECO — Official Site">
   <meta property="og:description" content="Club music · Heavy bass · Dancefloor vibes. New video + non-stop music.">
@@ -29,7 +33,7 @@
         <a href="#musique" data-i18n="nav_music">🎵 Music</a>
         <a href="#apropos" data-i18n="nav_about">✨ About</a>
       </nav>
-      <a class="btn btn-subscribe" href="https://www.youtube.com/@ELMATEKO?sub_confirmation=1" target="_blank" rel="noopener" data-i18n="nav_subscribe">Subscribe</a>
+      <a class="btn btn-subscribe" href="https://www.youtube.com/@ELMATEKO?sub_confirmation=1" target="_blank" rel="noopener noreferrer" data-i18n="nav_subscribe">Subscribe</a>
 
       <!-- 🌐 Language picker (ENG top right) -->
       <div class="lang" id="langBox">
@@ -109,7 +113,7 @@
           <iframe id="ytFrame" title="YouTube player — new Elmateco video" data-i18n-attr="title" data-i18n-key="yt_title" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </div>
-      <p class="video-watch" data-reveal><a href="https://www.youtube.com/@ELMATEKO/videos" target="_blank" rel="noopener" data-i18n="watch_all">See all videos on YouTube ↗</a></p>
+      <p class="video-watch" data-reveal><a href="https://www.youtube.com/@ELMATEKO/videos" target="_blank" rel="noopener noreferrer" data-i18n="watch_all">See all videos on YouTube ↗</a></p>
 
       <div class="section-sub" data-reveal>
         <h3 data-i18n="recent_h3">Latest releases</h3>
@@ -120,8 +124,7 @@
     <!-- ======================= NON-STOP MUSIC ======================= -->
     <section class="section" id="musique">
       <div class="section-head">
-        <span class="kicker" data-reveal="left" data-i18n="kicker_music">🎵 Non-stop play</span>
-        <h2 data-reveal="flip" data-i18n="music_h2">The music plays on loop</h2>
+        <h2 class="drops-title" data-reveal="flip" data-i18n="music_h2">NON-STOP DROPS! 🎵</h2>
       </div>
 
       <div class="player" data-reveal="zoom">
@@ -201,12 +204,12 @@
           <p class="about-quote" data-i18n="about_quote">“If you love strong bass, dance energy and club culture: subscribe and turn up the volume.” 🔊</p>
 
           <div class="social-grid">
-            <a class="social-chip" style="--c:#ff0033" href="https://www.youtube.com/@ELMATEKO" target="_blank" rel="noopener">▶️ YouTube</a>
-            <a class="social-chip" style="--c:#1db954" href="https://open.spotify.com/intl-fr/artist/1jnmquCWHzuyGLV4pJRiTU" target="_blank" rel="noopener">🎧 Spotify</a>
-            <a class="social-chip" style="--c:#fa2d48" href="https://music.apple.com/fr/artist/elmateco/1817971885" target="_blank" rel="noopener">🍎 Apple Music</a>
-            <a class="social-chip" style="--c:#ff9900" href="https://music.amazon.com/artists/B0FBLH56TR/elmateco" target="_blank" rel="noopener">📦 Amazon Music</a>
-            <a class="social-chip" style="--c:#69c9d0" href="https://www.tiktok.com/@elmateco_official" target="_blank" rel="noopener">🎵 TikTok</a>
-            <a class="social-chip" style="--c:#a855f7" href="https://hyperfollow.com/elmateco" target="_blank" rel="noopener">🔗 HyperFollow</a>
+            <a class="social-chip" style="--c:#ff0033" href="https://www.youtube.com/@ELMATEKO" target="_blank" rel="noopener noreferrer">▶️ YouTube</a>
+            <a class="social-chip" style="--c:#1db954" href="https://open.spotify.com/intl-fr/artist/1jnmquCWHzuyGLV4pJRiTU" target="_blank" rel="noopener noreferrer">🎧 Spotify</a>
+            <a class="social-chip" style="--c:#fa2d48" href="https://music.apple.com/fr/artist/elmateco/1817971885" target="_blank" rel="noopener noreferrer">🍎 Apple Music</a>
+            <a class="social-chip" style="--c:#ff9900" href="https://music.amazon.com/artists/B0FBLH56TR/elmateco" target="_blank" rel="noopener noreferrer">📦 Amazon Music</a>
+            <a class="social-chip" style="--c:#69c9d0" href="https://www.tiktok.com/@elmateco_official" target="_blank" rel="noopener noreferrer">🎵 TikTok</a>
+            <a class="social-chip" style="--c:#a855f7" href="https://hyperfollow.com/elmateco" target="_blank" rel="noopener noreferrer">🔗 HyperFollow</a>
           </div>
           <p class="about-contact"><span data-i18n="about_contact">📬 Contact:</span> <a href="mailto:Info.elmateco@gmail.com">Info.elmateco@gmail.com</a></p>
         </div>
@@ -218,8 +221,8 @@
   <footer class="footer">
     <img class="footer-avatar" src="https://yt3.googleusercontent.com/rX7Kl1QVBpfA8F-n1XMFMrr4DgNn-jvtkCjabYcfRbaYGTJZLUdi8KRL9QgYeWQHjkTEMjDCfg=s88-c-k-c0x00ffffff-no-rj" alt="" aria-hidden="true">
     <p class="footer-name">ELMATECO</p>
-    <p class="footer-note" data-i18n="footer_note">Unofficial fan site — images and music © their rights holders.<br>Made with ❤️ and a lot of bass 🔉</p>
-    <p class="footer-year">© <span id="year"></span> — <a href="https://www.youtube.com/@ELMATEKO" target="_blank" rel="noopener">youtube.com/@ELMATEKO</a></p>
+    <p class="footer-note" data-i18n="footer_note">All rights reserved — all music, images and content on this site are the exclusive property of ELMATECO.<br>Made with ❤️ and a lot of bass 🔉</p>
+    <p class="footer-year">© <span id="year"></span> — <a href="https://www.youtube.com/@ELMATEKO" target="_blank" rel="noopener noreferrer">youtube.com/@ELMATEKO</a></p>
   </footer>
 
   <!-- ======================= MINI PLAYER + MUSIC PILL ======================= -->

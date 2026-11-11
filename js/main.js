@@ -1,8 +1,13 @@
 /* ============================================================================
    ELMATECO — main.js : navigation, révélations, particules, compteurs, vidéo
    ----------------------------------------------------------------------------
-   Les textes traduits passent par window.t() (js/i18n.js).
-   Les dates (« il y a 3 jours ») et les nombres sont localisés via Intl.
+   • Les textes traduits passent par window.t() (js/i18n.js).
+   • Les dates et les nombres sont localisés via Intl.
+   • 📺 Les vidéos (« nouveau clip » + dernières sorties) sont chargées en
+     DIRECT depuis le flux officiel de la chaîne YouTube (RSS) : la page suit
+     la chaîne automatiquement, aucune mise à jour manuelle. Si le flux est
+     inaccessible (hors ligne, proxy indisponible), repli sur les données
+     statiques de js/config.js.
    ============================================================================ */
 (function () {
   'use strict';
@@ -11,6 +16,114 @@
   const t = window.t;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (id) => document.getElementById(id);
+
+  /* ============================================================
+     VIDEOS — flux RSS officiel de la chaîne (auto-mise à jour)
+     ============================================================ */
+  const FEED_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + C.channelId;
+  const FEED_PROXIES = [
+    (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+    (url) => 'https://corsproxy.io/?url=' + encodeURIComponent(url)
+  ];
+  const CACHE_KEY = 'elmateco-feed-cache';
+  const CACHE_TTL = 60 * 60 * 1000; // 1 heure
+
+  const state = { videos: null, latestId: C.latestVideo.id };
+
+  /* ---------- Utilitaires réseau ---------- */
+  function fetchTimeout(url, ms) {
+    const ctrl = ('AbortController' in window) ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), ms) : 0;
+    return fetch(url, { signal: ctrl ? ctrl.signal : undefined, cache: 'no-store' })
+      .then((r) => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .finally(() => { if (timer) clearTimeout(timer); });
+  }
+
+  /* ---------- Parsing du RSS (DOMParser, sorties en texte sûr) ---------- */
+  function parseFeedXml(xmlText) {
+    const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+    if (doc.querySelector('parsererror') || !doc.querySelector('entry')) return [];
+    const NS_YT = 'http://www.youtube.com/xml/schemas/2015';
+    const NS_MEDIA = 'http://search.yahoo.com/mrss/';
+    const out = [];
+    doc.querySelectorAll('entry').forEach((entry) => {
+      const id = (entry.getElementsByTagNameNS(NS_YT, 'videoId')[0] || {}).textContent;
+      const title = (entry.querySelector('title') || {}).textContent;
+      const published = (entry.querySelector('published') || {}).textContent;
+      const stats = entry.getElementsByTagNameNS(NS_MEDIA, 'statistics')[0];
+      const views = stats ? parseInt(stats.getAttribute('views') || '0', 10) : 0;
+      if (id && title && published) out.push({ id: id, title: title.trim(), published: published, views: views });
+    });
+    return out;
+  }
+
+  /* ---------- Cache local (limite les appels au flux) ---------- */
+  function readFeedCache() {
+    try {
+      const raw = window.localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const c = JSON.parse(raw);
+      if (!c || !Array.isArray(c.videos) || !c.ts) return null;
+      if (Date.now() - c.ts > CACHE_TTL) return null;
+      return c.videos;
+    } catch (err) { return null; }
+  }
+  function writeFeedCache(videos) {
+    try { window.localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), videos: videos })); }
+    catch (err) { /* stockage plein ou indisponible : on ignore */ }
+  }
+
+  /* ---------- Chargement avec repli en cascade ---------- */
+  function loadFeed() {
+    const attempts = [() => fetchTimeout(FEED_URL, 8000)]
+      .concat(FEED_PROXIES.map((p) => () => fetchTimeout(p(FEED_URL), 8000)));
+    const chain = (i) => {
+      if (i >= attempts.length) return Promise.reject(new Error('feed unreachable'));
+      return attempts[i]()
+        .then((text) => {
+          const vids = parseFeedXml(text);
+          if (!vids.length) throw new Error('empty feed');
+          return vids;
+        })
+        .catch(() => chain(i + 1));
+    };
+    return chain(0);
+  }
+
+  /* ---------- Âge relatif à partir d'une date ISO ---------- */
+  function relAgeFromDate(iso) {
+    const then = new Date(iso).getTime();
+    const diff = then - Date.now(); // négatif si passé
+    if (!isFinite(diff)) return { value: 0, unit: 'day' };
+    const abs = Math.abs(diff);
+    if (abs < 3600000) return { value: Math.round(diff / 60000), unit: 'minute' };
+    if (abs < 86400000) return { value: Math.round(diff / 3600000), unit: 'hour' };
+    if (abs < 7 * 86400000) return { value: Math.round(diff / 86400000), unit: 'day' };
+    if (abs < 60 * 86400000) return { value: Math.round(diff / (7 * 86400000)), unit: 'week' };
+    if (abs < 730 * 86400000) return { value: Math.round(diff / (30.44 * 86400000)), unit: 'month' };
+    return { value: Math.round(diff / (365.25 * 86400000)), unit: 'year' };
+  }
+
+  /* ---------- Repli statique (config.js) ---------- */
+  function fallbackVideos() {
+    const out = [{
+      id: C.latestVideo.id,
+      title: C.latestVideo.title,
+      age: C.latestVideo.age,
+      views: null
+    }];
+    (C.recentVideos || []).forEach((v) => {
+      out.push({ id: v.id, title: v.title, age: v.age, views: v.views });
+    });
+    return out;
+  }
+
+  /* ============================================================
+     BASE
+     ============================================================ */
 
   /* ---------- Année dans le footer ---------- */
   $('year').textContent = new Date().getFullYear();
@@ -61,9 +174,8 @@
       if (window.Intl && Intl.RelativeTimeFormat) {
         return new Intl.RelativeTimeFormat(locale(), { numeric: 'auto' }).format(age.value, age.unit);
       }
-    } catch (err) { /* fallback ci-dessous */ }
-    // Repli simple (anglais) si RelativeTimeFormat n'existe pas
-    const units = { day: 'day', week: 'week', month: 'month', year: 'year' };
+    } catch (err) { /* repli ci-dessous */ }
+    const units = { minute: 'minute', hour: 'hour', day: 'day', week: 'week', month: 'month', year: 'year' };
     const u = units[age.unit] || 'day';
     return Math.abs(age.value) + ' ' + u + (Math.abs(age.value) === 1 ? '' : 's') + ' ago';
   }
@@ -158,11 +270,13 @@
     requestAnimationFrame(tick);
   }
 
-  /* ---------- Lecteur du nouveau clip (façade → iframe) ---------- */
+  /* ============================================================
+     LECTEUR DU NOUVEAU CLIP (façade → iframe YouTube)
+     ============================================================ */
   const facade = $('videoFacade');
   const frame = $('videoFrame');
   const iframe = $('ytFrame');
-  const latest = C.latestVideo;
+  const thumb = $('facadeThumb');
 
   // Chaîne de secours pour la miniature : on essaie la plus belle, et si le
   // fichier n'existe pas on descend jusqu'à hqdefault (existe TOUJOURS).
@@ -177,21 +291,10 @@
     };
   }
 
-  const thumb = $('facadeThumb');
-  thumb.onerror = thumbFallbackChain(latest.id);
-  thumb.src = 'https://i.ytimg.com/vi/' + latest.id + '/maxresdefault.jpg';
-
-  function renderFacadeTexts() {
-    thumb.alt = t('thumb_prefix') + ' ' + latest.title;
-    $('facadeTitle').textContent = latest.title;
-    $('facadeAge').textContent = fmtAge(latest.age);
-  }
-  renderFacadeTexts();
-
   function playVideo() {
     facade.setAttribute('hidden', '');
     frame.removeAttribute('hidden');
-    iframe.src = 'https://www.youtube-nocookie.com/embed/' + latest.id +
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + state.latestId +
       '?autoplay=1&rel=0&color=white&modestbranding=1&playsinline=1';
   }
   facade.addEventListener('click', playVideo);
@@ -206,16 +309,29 @@
     window.addEventListener('load', () => setTimeout(playVideo, 800));
   }
 
-  /* ---------- Grille « dernières sorties » (reconstruite à chaque langue) ---------- */
+  /* ============================================================
+     RENDU DES VIDÉOS (données dynamiques, texte toujours sûr)
+     ============================================================ */
+  function renderFacade(v) {
+    if (!v) return;
+    state.latestId = v.id;
+    thumb.onerror = thumbFallbackChain(v.id);
+    thumb.src = 'https://i.ytimg.com/vi/' + v.id + '/maxresdefault.jpg';
+    thumb.alt = t('thumb_prefix') + ' ' + v.title;
+    $('facadeTitle').textContent = v.title;
+    const age = v.age || relAgeFromDate(v.published);
+    $('facadeAge').textContent = fmtAge(age);
+  }
+
   const grid = $('recentGrid');
-  function buildGrid() {
+  function renderGrid(videos) {
     grid.innerHTML = '';
-    (C.recentVideos || []).forEach((v) => {
+    videos.forEach((v) => {
       const a = document.createElement('a');
       a.className = 'v-card';
       a.href = 'https://www.youtube.com/watch?v=' + v.id;
       a.target = '_blank';
-      a.rel = 'noopener';
+      a.rel = 'noopener noreferrer';
 
       const thumbDiv = document.createElement('div');
       thumbDiv.className = 'v-thumb';
@@ -233,7 +349,10 @@
       title.textContent = v.title;
       const meta = document.createElement('p');
       meta.className = 'v-meta';
-      meta.textContent = fmtCompact(v.views) + ' ' + t('card_views') + ' · ' + fmtAge(v.age);
+      const age = v.age || relAgeFromDate(v.published);
+      meta.textContent = (typeof v.views === 'number' && v.views > 0)
+        ? fmtCompact(v.views) + ' ' + t('card_views') + ' · ' + fmtAge(age)
+        : fmtAge(age);
       info.appendChild(title);
       info.appendChild(meta);
 
@@ -242,7 +361,32 @@
       grid.appendChild(a);
     });
   }
-  buildGrid();
+
+  function applyVideos(videos) {
+    if (!videos || !videos.length) return;
+    state.videos = videos;
+    renderFacade(videos[0]);
+    renderGrid(videos.slice(1, 7));
+  }
+
+  function initVideos() {
+    const cached = readFeedCache();
+    if (cached && cached.length) {
+      applyVideos(cached);
+    }
+    loadFeed()
+      .then((videos) => {
+        if (videos.length) {
+          writeFeedCache(videos);
+          applyVideos(videos);
+        }
+      })
+      .catch(() => {
+        // Repli statique uniquement si on n'a rien pu afficher (pas de cache)
+        if (!state.videos) applyVideos(fallbackVideos());
+      });
+  }
+  initVideos();
 
   /* ---------- Stats « à propos » localisées ---------- */
   function formatAboutStats() {
@@ -255,8 +399,9 @@
 
   /* ---------- Changement de langue : rafraîchit les contenus dynamiques ---------- */
   document.addEventListener('elm:langchange', () => {
-    renderFacadeTexts();
-    buildGrid();
+    if (state.videos && state.videos.length) {
+      applyVideos(state.videos);
+    }
     formatAboutStats();
     // Re-formate les compteurs déjà animés dans la nouvelle locale
     statNums.forEach((el) => {

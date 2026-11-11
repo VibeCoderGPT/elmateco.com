@@ -13,7 +13,12 @@ git config http.sslBackend openssl
 git remote remove origin >nul 2>&1
 git remote add origin https://github.com/VibeCoderGPT/elmateco.com.git
 git push -u origin main
-if errorlevel 1 goto echec
+if errorlevel 1 (
+  echo.
+  echo  Le depot contient deja quelque chose : je force la synchro...
+  git push -u origin main --force
+  if errorlevel 1 goto echec
+)
 
 echo.
 echo  [OK] C'est envoye ! Le site est sur GitHub :

@@ -93,21 +93,19 @@ Le lecteur charge alors la playlist en ligne au démarrage (tableau JSON de
 être hébergés en HTTPS (Storage Supabase, hébergeur…). Si le chargement
 échoue, le site retombe silencieusement sur la playlist locale.
 
-## 🎬 Mettre à jour le nouveau clip
+## 🎬 Le nouveau clip + dernières sorties (mise à jour AUTOMATIQUE)
 
-Dans **`js/config.js`**, section `latestVideo`, remplace l'ID et le titre :
+Le site suit la chaîne YouTube **tout seul** : au chargement, il lit le flux
+officiel de la chaîne (RSS `https://www.youtube.com/feeds/videos.xml?channel_id=…`)
+et affiche **la vidéo la plus récente** en vedette + les 6 suivantes. Résultat
+mis en cache 1 heure (localStorage), donc aucune maintenance quand tu sors un
+nouveau clip.
 
-```js
-latestVideo: {
-  id: 'XXXXXXXXXXX',   // l'ID de la nouvelle vidéo YouTube
-  title: 'ELMATECO - Mon nouveau clip',
-  age: { value: -3, unit: 'day' }   // day | week | month | year (négatif = passé)
-},
-```
-
-L'ID d'une vidéo, c'est la partie après `watch?v=` dans son URL.
-La miniature du clip se règle toute seule : le site essaie automatiquement
-plusieurs tailles (`maxresdefault` → `sddefault` → `hqdefault`).
+- Si le flux est inaccessible (hors ligne, proxy indisponible), le site retombe
+  sur les données statiques de `js/config.js` (`latestVideo` + `recentVideos`)
+  — utile uniquement comme filet de secours.
+- Pour changer la chaîne : modifie `channelId` dans `js/config.js`.
+- La miniature se règle toute seule : `maxresdefault` → `sddefault` → `hqdefault`.
 
 ## 🖼️ Images
 
@@ -146,4 +144,4 @@ existent et que les IDs du HTML correspondent au JavaScript.
 
 ---
 
-*Site de fans non officiel. Les images, vidéos et musiques appartiennent à leurs ayants droit.*
+*© ELMATECO. Tous droits réservés — la musique, les images et tout le contenu de ce site sont la propriété exclusive d'ELMATECO.*
