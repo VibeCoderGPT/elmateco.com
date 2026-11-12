@@ -1640,3 +1640,59 @@ html.lang-switching .lang-sweep {
 @media (prefers-reduced-motion: reduce) {
   .drops-title { animation: none; }
 }
+
+/* ============================================================================
+   V5 — CORRECTIONS MOBILE (11 nov.)
+   • Hero : plus petit, marges gauche/droite symétriques, rien ne déborde.
+   • Nav : deux étages sur téléphone → « ELMATECO » et les liens ont chacun
+     leur place (le sélecteur de langue 🌐 n'est PAS modifié).
+   ============================================================================ */
+@media (max-width: 720px) {
+  :root { --nav-h: 106px; }
+
+  /* --- Nav à deux étages : logo + boutons en haut, liens en dessous --- */
+  .nav { height: auto; min-height: var(--nav-h); }
+  .nav-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 8px 14px;
+    column-gap: 10px;
+    row-gap: 6px;
+  }
+  .nav-logo { margin-right: auto; }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 22px;
+    padding: 2px 0 4px;
+  }
+  .nav-links a:nth-child(2) { display: inline; } /* les 3 liens ont leur rangée maintenant */
+  .nav-name { font-size: 0.92rem; }
+  .nav-avatar { width: 34px; height: 34px; }
+
+  /* --- Hero : plus petit + symétrique --- */
+  .hero { padding: calc(var(--nav-h) + 30px) 20px 56px; }
+  .hero-content { max-width: 100%; min-width: 0; }
+  .hero-frame { max-width: 100%; }
+  .hero-avatar-ring {
+    width: clamp(92px, 24vw, 122px);
+    margin-top: -36px;
+  }
+  .hero-title { font-size: clamp(2.1rem, 11vw, 3.4rem); max-width: 100%; }
+  .hero-tag { font-size: clamp(0.95rem, 3.4vw, 1.05rem); max-width: 100%; }
+  .hero-stats { gap: 8px; }
+  .stat { padding: 8px 12px; min-width: 92px; }
+  .stat-num { font-size: 1.1rem; }
+  .stat-label { font-size: 0.68rem; }
+  .hero-cta { gap: 10px; }
+  .hero-cta .btn { padding: 11px 18px; font-size: 0.82rem; }
+}
+
+@media (max-width: 560px) {
+  .hero { padding-left: 16px; padding-right: 16px; }
+  .hero-title { font-size: clamp(2rem, 11.5vw, 2.7rem); }
+  .hero-tag { font-size: 0.92rem; }
+  .hero-avatar-ring { margin-top: -30px; }
+  .stat { padding: 7px 10px; min-width: 84px; }
+}
